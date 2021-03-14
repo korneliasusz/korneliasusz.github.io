@@ -1,0 +1,277 @@
+body {
+    background: rgba(207, 205, 205, 0.884);
+}
+
+
+.image1 {
+    width: 50%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.image2 {
+    width: 5%;
+    height: 5%;
+}
+
+.grid-container {
+    width: 800px;
+    height: auto;
+    display: grid;
+    margin: 50px auto;
+}
+
+.grid-item {
+    text-align: center;
+    font-size: 25px;
+    line-height: 0.5cm;
+    width: 100px;
+}
+
+
+.grid-container2 {
+    width: 800px;
+    display: grid;
+    margin: 50px auto;
+    grid-template-columns: 300px 150px 50px 250px;
+    padding: 10px;
+    grid-template-areas: 
+        "head head head2 head2"
+        "one me me me"
+        "one two two two"
+        "one three three four"
+        "eight seven seven seven"
+        "nine five five six";
+    }
+
+.head {
+    padding: 100px;
+    background: rosybrown;
+    height: 100px;
+    width: 350px;
+    border-bottom: solid black;
+    border-top: solid;
+    border-right: solid;
+    border-left: solid;
+}
+
+.head2 {
+    padding: 100px;
+    background: rosybrown;
+    height: 100px;
+    text-align: center;
+    line-height: 10px;
+    width: 350px;
+    font-family: 'Book Antiqua';
+    font-size: 25px;
+    border-bottom: solid black;
+    border-top: solid;
+    border-right: solid;
+}
+
+.me {
+    grid-area: me;
+    width: 550px;
+    background-color: white;
+    border-right: solid;
+
+}
+
+.one {
+    grid-area: one;
+    border-right: solid;
+}
+
+.two {
+    grid-area: two;
+    font-family: 'Book Antiqua';
+    font-size: 20px;
+    text-align: center;
+    height: 30px;
+    background-color: white;
+    text-transform: uppercase;
+    border-style: outset;
+    width: 545px;
+    border-left: solid black;
+    border-right: solid;
+}
+
+.three {
+    grid-area: three;
+    height: auto;
+    width: auto;
+    font-size: 16px;
+    text-align: left;
+    font-family: 'Book Antiqua';
+    background-color: white;
+    border-left: solid black;
+}
+
+.four {
+    grid-area: four;
+    height: auto;
+    width: auto;
+    font-size: 16px;
+    text-align: left;
+    font-family: 'Book Antiqua';
+    background-color: white;
+    width: 350px;
+    border-right: solid;
+
+}
+
+
+.five {
+    grid-area: five;
+    height: auto;
+    width: auto;
+    font-size: 16px;
+    text-align: left;
+    font-family: 'Book Antiqua';
+    background-color: white;
+    border-bottom: solid;
+
+}
+
+.six {
+    grid-area: six;
+    height: auto;
+    width: auto;
+    font-size: 16px;
+    text-align: left;
+    font-family: 'Book Antiqua';
+    background-color: white;
+    width: 350px;
+    border-right: solid;
+    border-bottom: solid;
+}
+
+.seven {
+    grid-area: seven;
+    font-family: 'Book Antiqua';
+    font-size: 20px;
+    text-align: center;
+    height: 30px;
+    background-color: white;
+    text-transform: uppercase;
+    border-style: outset;
+    width: 545px;
+    border-right: solid;
+}
+
+.eight {
+    grid-area: eight;
+    font-family: 'Book Antiqua';
+    font-size: 20px;
+    text-align: center;
+    height: 30px;
+    background-color: white;
+    text-transform: uppercase;
+    border-style: outset;
+    width: 295px;
+    border-right: solid black;
+    border-left: solid;
+}
+
+.nine {
+    grid-area: nine;
+    width: 294px;
+    background-color: white;
+    padding-bottom: 10px;
+    border-right: solid black;
+    border-bottom: solid;
+    border-left: solid;
+}
+
+.flex-container {
+    width: 295px;
+    height: 508px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(231, 187, 187);
+    border-right: solid black;
+    border-left: solid;
+    border-bottom: solid;
+}
+
+.flex-container2 {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: white;    
+}
+
+.flex-container > div {
+    background-color: rgb(231, 187, 187);
+    width: 280px;
+    margin: 10px;
+    text-align: center;
+    line-height: 20px;
+    font-family: 'Book Antiqua';
+    font-size: 16px;
+}
+
+.flex-container2 > div2 {
+    background-color: white;
+    width: 220px;
+    height: 120px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    line-height: 20px;
+    font-family: 'Book Antiqua';
+    font-size: 16px;
+    border-bottom: groove;
+    padding-left: 10%;
+}
+
+.flex-container2 > div3 {
+    background-color: white;
+    width: 330px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;    
+    height: 120px;
+    text-align: left;
+    line-height: 20px;
+    font-family: 'Book Antiqua';
+    font-size: 16px;
+    border-bottom: groove;
+}
+
+.flex-container2 > div4 {
+    background-color: white;
+    width: 220px;
+    margin-left: 10%;
+    margin-right: 10px;
+    height: 120px;
+    text-align: left;
+    line-height: 20px;
+    font-family: 'Book Antiqua';
+    font-size: 16px;
+    border-bottom: groove;
+    padding-left: 5%;
+}
+
+p {
+    font-family: 'Book Antiqua';
+    font-size: 16px;  
+    text-align: left;
+    padding-left: 10%;
+    padding-right: 2%;
+}
+
+h3 {
+    grid-area: two;
+    width: auto;
+    font-family: 'Book Antiqua';
+    font-size: 20px;
+    text-align: center;
+    height: 30px;
+    background-color: white;
+    text-transform: uppercase;
+    border-style: outset;
+}
+
