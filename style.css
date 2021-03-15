@@ -223,7 +223,7 @@ body {
 
 .flex-container {
     width: 295px;
-    height: 510px;
+    height: 512px;
     display: flex;
     flex-direction: column;
     background-color: rgb(231, 187, 187);
