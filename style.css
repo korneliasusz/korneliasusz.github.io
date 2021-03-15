@@ -41,7 +41,9 @@ body {
         "one two two two"
         "one three three four"
         "eight seven seven seven"
-        "nine five five six";
+        "nine five five six"
+        "nine ten ten ten"
+        "nine eleven eleven twelve";
     }
 
 .head {
@@ -74,7 +76,7 @@ body {
     width: 550px;
     background-color: white;
     border-right: solid;
-
+    border-bottom: solid;
 }
 
 .one {
@@ -129,7 +131,6 @@ body {
     font-family: 'Book Antiqua';
     background-color: white;
     border-bottom: solid;
-
 }
 
 .six {
@@ -156,6 +157,7 @@ body {
     border-style: outset;
     width: 548px;
     border-right: solid;
+    border-top: solid;
 }
 
 .eight {
@@ -180,6 +182,43 @@ body {
     border-right: solid black;
     border-bottom: solid;
     border-left: solid;
+}
+
+.ten {
+    grid-area: ten;
+    font-family: 'Book Antiqua';
+    font-size: 20px;
+    text-align: center;
+    height: 30px;
+    background-color: white;
+    text-transform: uppercase;
+    border-style: outset;
+    width: 548px;
+    border-right: solid;
+}
+
+.eleven {
+    grid-area: eleven;
+    height: auto;
+    width: auto;
+    font-size: 16px;
+    text-align: left;
+    font-family: 'Book Antiqua';
+    background-color: white;
+    border-bottom: solid;
+}
+
+.twelve {
+    grid-area: twelve;
+    height: auto;
+    width: auto;
+    font-size: 16px;
+    text-align: left;
+    font-family: 'Book Antiqua';
+    background-color: white;
+    width: 350px;
+    border-right: solid;
+    border-bottom: solid;
 }
 
 .flex-container {
