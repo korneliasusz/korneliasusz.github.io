@@ -5,7 +5,7 @@
     margin: 0px;
 }
 
-.results .body, .results .logo_section, .results .search_section, .results .buttons_area, .results .null, .results .bottom_section
+.results #home_page
 {
     display: none;
 }
@@ -516,6 +516,7 @@
 {
     background-color: rgb(238, 238, 238);
     position: relative;
+    right: 0px;
     left: 0px;
     bottom: 0px;
     width: 100%;

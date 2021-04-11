@@ -3,7 +3,7 @@ body
     margin: 0px;
 }
 
-.home .header, .home .options, .home .results_area, .home .topbar, .home .list, .home .footer
+.home #results_page
 {
     display: none;
 }
