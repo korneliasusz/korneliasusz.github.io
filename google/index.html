@@ -55,7 +55,7 @@
                     </div>                  
                     <div class="text_area1">
                         <div class="text_area2">
-                            <input v-model="googleSearch" class="text_input" maxlength="2048" name="q" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus role="combobox" spellcheck="false" title="Szukaj" value aria-label="Szukaj">
+                            <input v-model="googleSearch" ref="inputFocus" class="text_input" maxlength="2048" name="q" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus role="combobox" spellcheck="false" title="Szukaj" value aria-label="Szukaj">
                         </div>
                     </div>                    
                     <div class="key_area">
@@ -106,7 +106,7 @@
                 <div class="topbar">
                     <img class="logo_img" src="logo.png">
                     <div class="searchbar">
-                        <input v-model="googleSearch" class="search_text" type="text"/>
+                        <input v-model="googleSearch" ref="inputFocus" class="search_text" type="text"/>
                         <img class="key_img" src="keyboard.PNG">
                         <img class="mic_img" src="mic.png">
                         <img class="search_img" src="search.png">
@@ -279,6 +279,12 @@
                         let filtered = this.cities.filter(city => city.name.includes(this.googleSearch));
                         return filtered.slice(0,10);
                     }
+                },
+                
+                updated() {
+                    this.$nextTick(() => {
+                        this.$refs.inputFocus.focus();
+                    });
                 }
             });
         </script>
