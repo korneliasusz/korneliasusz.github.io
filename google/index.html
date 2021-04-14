@@ -276,7 +276,7 @@
 
                 computed: {
                     filteredCities: function() {
-                        let filtered = this.cities.filter(city => city.name.includes(this.googleSearch));
+                        let filtered = this.cities.filter(city => city.name.toLowerCase().includes(this.googleSearch));
                         return filtered.slice(0,10);
                     }
                 },
