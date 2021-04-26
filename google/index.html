@@ -13,7 +13,7 @@
 
 <body>  <!--W celu wyswietlenia strony glownej class="home", w celu wyswietlenia strony z wynikami class="results"-->
     <!--Strona glowna-->
-    <div id="app" :class="{home: googleSearch.length == 0, results: googleSearch.length > 0}"> <!--lub :class="googleSearch.length == 0 ? 'home' : 'results'"-->
+    <div id="app" :class="{home: googleResults == false, results: googleResults == true}" > <!--:class="{home: googleSearch.length == 0, results: googleSearch.length > 0}" lub :class="googleSearch.length == 0 ? 'home' : 'results'"-->
         <div id="home_page">
         <div class="body">
             <div class="header">
@@ -66,6 +66,12 @@
                     </div>
                 </div>
             </div>
+            <ul :class="{nothing: googleSearch.length == 0, autocompleter: googleSearch.length > 0}">
+                <li v-for="city in filteredCities" v-on:click="googleSearch=city.name; selectCity()">
+                    <img src="search.png">
+                    <span class="highlighted" v-html="highlight(city.name, googleSearch)">{{ city.name }}</span>
+                </li>
+            </ul>
         </div>
 
         <div class="buttons_area">
@@ -106,15 +112,22 @@
                 <div class="topbar">
                     <img class="logo_img" src="logo.png">
                     <div class="searchbar">
-                        <input v-model="googleSearch" ref="inputFocus" class="search_text" type="text"/>
+                        <input v-model="googleSearch" ref="inputFocus" class="search_text" type="text" v-on:click="selectCityResults()"/>
                         <img class="key_img" src="keyboard.PNG">
                         <img class="mic_img" src="mic.png">
                         <img class="search_img" src="search.png">
                     </div>
+                    <ul :class="{nothing: autocompleterResults == true || googleSearch.length == 0, autocompleter: autocompleterResults == false}">
+                        <li v-for="city in filteredCities" v-on:click="googleSearch=city.name; selectCityResults2()">
+                            <img src="search.png">
+                            <span class="highlighted" v-html="highlight(city.name, googleSearch)">{{ city.name }}</span>
+                        </li>
+                    </ul>
                     <img class="menu" src="bars.png">
                     <button class="log_button">Zaloguj się</button>
                 </div>
             </div>
+            
             <div class="options">
                 <ul class="options1">
                     <span class="pic"><svg focusable="false" viewBox="0 0 24 24"><path fill="#34a853" d="M10 2v2a6 6 0 0 1 6 6h2a8 8 0 0 0-8-8"></path><path fill="#ea4335" d="M10 4V2a8 8 0 0 0-8 8h2c0-3.3 2.7-6 6-6"></path><path fill="#fbbc04" d="M4 10H2a8 8 0 0 0 8 8v-2c-3.3 0-6-2.69-6-6"></path><path fill="#4285f4" d="M22 20.59l-5.69-5.69A7.96 7.96 0 0 0 18 10h-2a6 6 0 0 1-6 6v2c1.85 0 3.52-.64 4.88-1.68l5.69 5.69L22 20.59"></path></svg></span>
@@ -134,12 +147,12 @@
                 </ul>
             </div>
             <div class="results_area">
-                <p>Miasta zawierające frazę <i>{{ googleSearch }}</i>:</p>
+                <!--<p>Miasta zawierające frazę <i>{{ googleSearch }}</i>:</p>
                 <ul>
                     <li v-for="city in filteredCities">
                         {{ city.name }}
                     </li>
-                </ul>
+                </ul>-->
                 <p class="results_number">Około 40 500 000 wyników (0,74 s)</p>
                 <div class="search_result">
                     <a href=" " >
@@ -272,20 +285,50 @@
                 data: {
                     googleSearch: "",
                     cities: window.cities,
+                    googleResults: false,
+                    autocompleterResults: true,
                 },
 
                 computed: {
                     filteredCities: function() {
-                        let filtered = this.cities.filter(city => city.name.toLowerCase().includes(this.googleSearch));
-                        return filtered.slice(0,10);
-                    }
+                        let filtered = this.cities.filter(city => (city.name.includes(this.googleSearch) || city.name.toLowerCase().includes(this.googleSearch)));
+
+                        if (this.googleSearch == 0)
+                        {
+                            return null;
+                        } else 
+                        {
+                            return filtered.slice(0,10);
+                        }
+                    },
+
+                   
                 },
+
+                methods: {
+                    selectCity: function() {
+                        this.googleResults = true;
+                    },
+
+                    highlight: function(word, query) {
+                        return result = word.replace(query, '<span class="nonhighlighted">' + query + '</span>')
+                    },
+
+                    selectCityResults: function() {
+                        this.autocompleterResults = false;
+                    },
+
+                    selectCityResults2: function() {
+                        this.autocompleterResults = true;
+                    }
+                }
                 
-                updated() {
+                
+                /*updated() {
                     this.$nextTick(() => {
                         this.$refs.inputFocus.focus();
                     });
-                }
+                }*/
             });
         </script>
     </div>
