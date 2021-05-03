@@ -298,6 +298,7 @@
                     autocompleterResults: true,
                     current: -1,
                     currentResults: -1,
+                    filteredCities_update: true,
                 },
 
                 computed: {
@@ -316,9 +317,17 @@
                    
                 },
 
+                watch: {
+                    current: function() {
+                        //this.googleSearch = this.filteredCities[this.current].name;
+                    },
+
+                },
+
                 methods: {
                     selectCity: function() {
                         this.googleResults = true;
+                        this.filteredCities_update = true;
                     },
 
                     highlight: function(word, query) {
@@ -337,6 +346,9 @@
                         if (this.current < this.filteredCities.length)
                         {
                             this.current++;
+                        } else if (this.current == this.filteredCities.length)
+                        {
+                            this.current = 0;
                         }
                     },
 
@@ -351,6 +363,9 @@
                         if (this.currentResults < this.filteredCities.length)
                         {
                             this.currentResults++;
+                        } else if (this.currentResults == this.filteredCities.length)
+                        {
+                            this.currentResults = 0;
                         }
                     },
 
