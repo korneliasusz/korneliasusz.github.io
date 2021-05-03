@@ -58,9 +58,15 @@
     font-weight: normal;
 }
 
-.results .autocompleter li:hover
+.results .autocompleter .element:hover
 {
     background-color: rgb(221, 221, 221);
+}
+
+.results .hovered
+{
+    background-color: rgb(221, 221, 221);
+
 }
 
 .results .topbar
