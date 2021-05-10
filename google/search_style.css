@@ -10,64 +10,7 @@
     display: none;
 }
 
-.results .nothing
-{
-    display: none;
-}
 
-.results .autocompleter
-{
-    position: absolute;
-    list-style: none;
-    background-color: white;
-    color: rgb(33, 33, 33);
-    cursor: default;
-    font-family: 'arial';
-    font-size: 16px;
-    border-right-color: rgb(223, 225, 229);
-    border-right-style: solid;
-    border-right-width: 1px;
-    border-left-color: rgb(223, 225, 229);
-    border-left-style: solid;
-    border-left-width: 1px; 
-    border-bottom-color: rgb(223, 225, 229);
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-radius: 24px;
-    margin-left: 147px;
-    top: 1px;
-    width: 678px;
-    padding-left: 14px;
-    padding-top: 50px;
-}
-
-.results .autocompleter li
-{
-    padding-top: 5px;
-    padding-bottom: 5px;
-    text-align: left;
-}
-
-.results .highlighted
-{
-    font-weight: bold;
-}
-
-.results .nonhighlighted
-{
-    font-weight: normal;
-}
-
-.results .autocompleter .element:hover
-{
-    background-color: rgb(221, 221, 221);
-}
-
-.results .hovered
-{
-    background-color: rgb(221, 221, 221);
-
-}
 
 .results .topbar
 {

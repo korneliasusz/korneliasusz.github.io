@@ -6,9 +6,11 @@
     <link rel="shortcut icon" href="icon.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="search_style.css">
+    <link rel="stylesheet" href="autocompleter.css">
     <title>Google</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="cities.js"></script>
+    <script src="autocompleter.js"></script>
 </head>
 
 <body>  <!--W celu wyswietlenia strony glownej class="home", w celu wyswietlenia strony z wynikami class="results"-->
@@ -320,8 +322,12 @@
                 watch: {
                     current: function() {
                         //this.googleSearch = this.filteredCities[this.current].name;
+                        this.filteredCities_update = false;
                     },
 
+                    googleSearch: function() {
+                        this.filteredCities_update = true;
+                    }
                 },
 
                 methods: {
