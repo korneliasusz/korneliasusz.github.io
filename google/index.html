@@ -15,7 +15,7 @@
 
 <body>  <!--W celu wyswietlenia strony glownej class="home", w celu wyswietlenia strony z wynikami class="results"-->
     <!--Strona glowna-->
-    <div id="app" :class="{home: googleResults == false, results: googleResults == true}" > <!--:class="{home: googleSearch.length == 0, results: googleSearch.length > 0}" lub :class="googleSearch.length == 0 ? 'home' : 'results'"-->
+    <div id="app" :class="{home: this.googleResults === false, results: this.googleResults === true}" > <!--:class="{home: googleSearch.length == 0, results: googleSearch.length > 0}" lub :class="googleSearch.length == 0 ? 'home' : 'results'"-->
         <div id="home_page">
         <div class="body">
             <div class="header">
@@ -49,7 +49,7 @@
             </div>
         </div>
         
-        <div class="search_section">
+        <!--<div class="search_section">
             <div class="search_area">
                 <div class="search_area2">
                     <div class="search_icon">
@@ -79,7 +79,9 @@
                     <span class="highlighted" v-html="highlight(city.name, googleSearch)">{{ city.name }}</span>
                 </li>
             </ul>
-        </div>
+        </div>-->
+
+        <v-autocompleter v-on:enter="googleResults=true"></v-autocompleter>
 
         <div class="buttons_area">
             <input class="button_search" type="submit" value="Szukaj w Google">
@@ -116,7 +118,7 @@
      <!--Strona wyszukiwania-->
         <div id="results_page">
             <div id="header">
-                <div class="topbar">
+                <!-- <div class="topbar">
                     <img class="logo_img" src="logo.png">
                     <div class="searchbar">
                         <input v-model="googleSearch" ref="inputFocus" class="search_text" type="text" v-on:click="selectCityResults()"
@@ -138,8 +140,10 @@
                     <img class="menu" src="bars.png">
                     <button class="log_button">Zaloguj się</button>
                 </div>
-            </div>
+            </div> -->
             
+            <v-autocompleter-results :options="cities"></v-autocompleter-results>
+
             <div class="options">
                 <ul class="options1">
                     <span class="pic"><svg focusable="false" viewBox="0 0 24 24"><path fill="#34a853" d="M10 2v2a6 6 0 0 1 6 6h2a8 8 0 0 0-8-8"></path><path fill="#ea4335" d="M10 4V2a8 8 0 0 0-8 8h2c0-3.3 2.7-6 6-6"></path><path fill="#fbbc04" d="M4 10H2a8 8 0 0 0 8 8v-2c-3.3 0-6-2.69-6-6"></path><path fill="#4285f4" d="M22 20.59l-5.69-5.69A7.96 7.96 0 0 0 18 10h-2a6 6 0 0 1-6 6v2c1.85 0 3.52-.64 4.88-1.68l5.69 5.69L22 20.59"></path></svg></span>
@@ -279,161 +283,26 @@
                     <a class="items">Polska</a>
                     <a class="items"><b>Dębniki, Kraków</b></a>
                     <a class="items">- Z twojego adresu internetowego</a>
-                    <aa href="" class="items"> - Użyj dokładnej lokalizacji</aa>
-                    <aa href="" class="items"> - Dowiedz się więcej</aa>
+                    <a href="" class="items cursor"> - Użyj dokładnej lokalizacji</a>
+                    <a href="" class="items cursor"> - Dowiedz się więcej</a>
                 </div>
                 <div class="last">
-                    <aa href="" class="items">Pomoc</aa>
-                    <aa href="" class="items">Prześlij opinię</aa>
-                    <aa href="" class="items">Prywatność</aa>
-                    <aa href="" class="items">Warunki</aa>
+                    <a href="" class="items cursor">Pomoc</a>
+                    <a href="" class="items cursor">Prześlij opinię</a>
+                    <a href="" class="items cursor">Prywatność</a>
+                    <a href="" class="items cursor">Warunki</a>
                 </div>
             </div>
         </div>
-        
-        <script>
-            var app = new Vue({
-                el: '#app',
-                data: {
-                    googleSearch: "",
-                    cities: window.cities,
-                    googleResults: false,
-                    autocompleterResults: true,
-                    current: -1,
-                    currentResults: -1,
-                    filteredCities: [],
-                    autocompleterIsActive: false,
-                },
-
-                                 
-                
-
-                watch: {
-                    current: function() {
-                        //this.googleSearch = this.filteredCities[this.current].name;
-                        this.filteredCities_update = false;
-                    },
-
-                    googleSearch: function() {
-                        if (this.autocompleterIsActive)
-                        {
-                            return;
-                        }
-
-                        //this.filteredCities_update = true;
-                        let filtered = this.cities.filter(city => (city.name.includes(this.googleSearch) || city.name.toLowerCase().includes(this.googleSearch)));
-
-                        if (this.googleSearch === 0)
-                        {
-                            filteredCities = [];
-                            return;
-                        } else 
-                        {
-                            this.filteredCities = filtered.slice(0,10);
-                        }
-                        //this.filteredCities = filtered.slice(0,10);
-                    }
-                },
-
-                methods: {
-                    selectCity: function() {
-                        this.googleResults = true;
-                        this.filteredCities_update = true;
-                    },
-
-                    highlight: function(word, query) {
-                        return result = word.replace(query, '<span class="nonhighlighted">' + query + '</span>')
-                    },
-
-                    selectCityResults: function() {
-                        this.autocompleterResults = false;
-                    },
-
-                    selectCityResults2: function() {
-                        this.autocompleterResults = true;
-                    },
-
-                    down: function() {
-                        if (!this.autocompleterIsActive) {
-                            this.current = -1;
-                        }
-                        if (this.current < this.filteredCities.length)
-                        {
-                            this.current++;
-                        } else if (this.current == this.filteredCities.length)
-                        {
-                            this.current = 0;
-                        }
-                        this.autocompleterIsActive = true;
-                        this.googleSearch = this.filteredCities[this.current].name;
-
-                    },
-
-                    up: function() {
-                        if (!this.autocompleterIsActive) {
-                            this.current = -1;
-                        }
-                        if(this.current > 0)
-                        {
-                            this.current--;
-                        } else if (this.current < 0)
-                        {
-                            this.current = this.filteredCities.length - 1;
-                        }
-                        this.autocompleterIsActive = true;
-                        this.googleSearch = this.filteredCities[this.current].name;
-                    },
-
-                    back: function() {
-                        this.autocompleterIsActive = false;
-                        this.current = -1;
-                    },
-
-                    downResults: function() {
-                        if (!this.autocompleterIsActive) {
-                            this.currentResults = -1;
-                        }
-                        if (this.currentResults < this.filteredCities.length)
-                        {
-                            this.currentResults++;
-                        } else if (this.currentResults == this.filteredCities.length)
-                        {
-                            this.currentResults = 0;
-                        }
-                        this.autocompleterIsActive = true;
-                        this.googleSearch = this.filteredCities[this.currentResults].name;
-                    },
-
-                    upResults: function() {
-                        if (!this.autocompleterIsActive) {
-                            this.currentResults = -1;
-                        }
-                        if(this.currentResults > 0)
-                        {
-                            this.currentResults--;
-                        } else if (this.currentResults < 0)
-                        {
-                            this.currentResults = this.filteredCities.length - 1;
-                        }
-                        this.autocompleterIsActive = true;
-                        this.googleSearch = this.filteredCities[this.currentResults].name;
-                    },
-
-                    backResults: function() {
-                        this.autocompleterResults = false;
-                        this.autocompleterIsActive = false;
-                        this.currentResults = -1;
-                    }
-                }
-                
-                
-                /*updated() {
-                    this.$nextTick(() => {
-                        this.$refs.inputFocus.focus();
-                    });
-                }*/
-            });
-        </script>
     </div>
+
+    <script type="text/javascript">
+        new Vue({ 
+            el: '#app',
+            data: {
+                googleResults: false,
+          },
+        })
+    </script>
 </body>
 </html>

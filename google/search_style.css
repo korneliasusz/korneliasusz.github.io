@@ -10,8 +10,6 @@
     display: none;
 }
 
-
-
 .results .topbar
 {
     display: flex;
@@ -63,16 +61,6 @@
     padding-left: 0px;
     padding-top: 14px;
     padding-right: 25px;
-}
-
-.results .search_text
-{
-    height: 45px;
-    border-style: none;
-    font-size: 16px;
-    line-height: 45px;
-    padding-left: 20px;
-    flex: 1;
 }
 
 .results .search_text:focus
@@ -544,6 +532,11 @@
     color: rgb(112,117,122);
 }
 
+.results .items .cursor
+{
+    cursor: pointer;
+}
+
 .results .last
 {
     display: flex;
@@ -563,7 +556,7 @@
 .results aa
 {
     padding-top: 20px;
-    cursor: pointer;
+
 }
 
 .results aa:hover
