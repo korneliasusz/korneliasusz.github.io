@@ -61,6 +61,7 @@
                                 v-on:keyup.enter="selectCity(), googleSearch=filteredCities[current].name"
                                 v-on:keyup.down="down()"
                                 v-on:keyup.up="up()"
+                                v-on:keyup.delete="back()"                       
                             />
                         </div>
                     </div>                    
@@ -300,24 +301,12 @@
                     autocompleterResults: true,
                     current: -1,
                     currentResults: -1,
-                    filteredCities_update: true,
+                    filteredCities: [],
+                    autocompleterIsActive: false,
                 },
 
-                computed: {
-                    filteredCities: function() {
-                        let filtered = this.cities.filter(city => (city.name.includes(this.googleSearch) || city.name.toLowerCase().includes(this.googleSearch)));
-
-                        if (this.googleSearch == 0)
-                        {
-                            return null;
-                        } else 
-                        {
-                            return filtered.slice(0,10);
-                        }
-                    },
-
-                   
-                },
+                                 
+                
 
                 watch: {
                     current: function() {
@@ -326,7 +315,23 @@
                     },
 
                     googleSearch: function() {
-                        this.filteredCities_update = true;
+                        if (this.autocompleterIsActive)
+                        {
+                            return;
+                        }
+
+                        //this.filteredCities_update = true;
+                        let filtered = this.cities.filter(city => (city.name.includes(this.googleSearch) || city.name.toLowerCase().includes(this.googleSearch)));
+
+                        if (this.googleSearch === 0)
+                        {
+                            filteredCities = [];
+                            return;
+                        } else 
+                        {
+                            this.filteredCities = filtered.slice(0,10);
+                        }
+                        //this.filteredCities = filtered.slice(0,10);
                     }
                 },
 
@@ -349,6 +354,9 @@
                     },
 
                     down: function() {
+                        if (!this.autocompleterIsActive) {
+                            this.current = -1;
+                        }
                         if (this.current < this.filteredCities.length)
                         {
                             this.current++;
@@ -356,9 +364,15 @@
                         {
                             this.current = 0;
                         }
+                        this.autocompleterIsActive = true;
+                        this.googleSearch = this.filteredCities[this.current].name;
+
                     },
 
                     up: function() {
+                        if (!this.autocompleterIsActive) {
+                            this.current = -1;
+                        }
                         if(this.current > 0)
                         {
                             this.current--;
@@ -366,9 +380,19 @@
                         {
                             this.current = this.filteredCities.length - 1;
                         }
+                        this.autocompleterIsActive = true;
+                        this.googleSearch = this.filteredCities[this.current].name;
+                    },
+
+                    back: function() {
+                        this.autocompleterIsActive = false;
+                        this.current = -1;
                     },
 
                     downResults: function() {
+                        if (!this.autocompleterIsActive) {
+                            this.currentResults = -1;
+                        }
                         if (this.currentResults < this.filteredCities.length)
                         {
                             this.currentResults++;
@@ -376,9 +400,14 @@
                         {
                             this.currentResults = 0;
                         }
+                        this.autocompleterIsActive = true;
+                        this.googleSearch = this.filteredCities[this.currentResults].name;
                     },
 
                     upResults: function() {
+                        if (!this.autocompleterIsActive) {
+                            this.currentResults = -1;
+                        }
                         if(this.currentResults > 0)
                         {
                             this.currentResults--;
@@ -386,10 +415,13 @@
                         {
                             this.currentResults = this.filteredCities.length - 1;
                         }
+                        this.autocompleterIsActive = true;
+                        this.googleSearch = this.filteredCities[this.currentResults].name;
                     },
 
                     backResults: function() {
                         this.autocompleterResults = false;
+                        this.autocompleterIsActive = false;
                         this.currentResults = -1;
                     }
                 }
