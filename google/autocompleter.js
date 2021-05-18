@@ -123,7 +123,7 @@ Vue.component('v-autocompleter', {
                     </div>                  
                     <div class="text_area1">
                         <div class="text_area2">
-                        <input :value="value" ref="inputFocus" class="text_input" maxlength="2048" name="q" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus role="combobox" spellcheck="false" title="Szukaj" value aria-label="Szukaj" placeholder="Wpisz wyszukiwaną frazę"
+                        <input :value="value" ref="inputFocus" class="text_input" maxlength="2048" name="q" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus role="combobox" spellcheck="false" title="Szukaj" value aria-label="Szukaj"
                             @input="$emit('input', $event.target.value)"
                             v-on:keyup.enter="selectCity(); value=filteredCities[current].name"
                             v-on:keyup.down="down()"
@@ -272,7 +272,7 @@ Vue.component('v-autocompleter-results', {
             <div class="topbar">
                     <img class="logo_img" src="logo.png">
                     <div class="searchbar">
-                    <input :value="value" ref="inputFocus" class="search_text" type="text" v-on:click="selectCityResults()" placeholder="Wpisz wyszukiwaną frazę"
+                    <input :value="value" ref="inputFocus" class="search_text" type="text" v-on:click="selectCityResults()"
                         @input="$emit('input', $event.target.value)"
                         v-on:keyup.enter="selectCityResults2()"
                         v-on:keyup.down="downResults()"
