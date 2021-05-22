@@ -81,7 +81,7 @@
             </ul>
         </div>-->
 
-        <v-autocompleter v-model="googleSearch" @input="googleSearch = $event" v-on:enter="googleResults=true"></v-autocompleter>
+        <v-autocompleter v-model="googleSearch" @input="googleSearch = $event" v-on:enter="showResults"></v-autocompleter>
 
         <div class="buttons_area">
             <input class="button_search" type="submit" value="Szukaj w Google">
@@ -303,6 +303,12 @@
                 googleResults: false,
                 googleSearch: '',
           },
+          methods: {
+              showResults: function(name) {
+                  this.googleResults = true;
+                  this.googleSearch = name;
+              }
+          }
         })
     </script>
 </body>

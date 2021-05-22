@@ -125,7 +125,7 @@ Vue.component('v-autocompleter', {
                         <div class="text_area2">
                         <input :value="value" ref="inputFocus" class="text_input" maxlength="2048" name="q" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus role="combobox" spellcheck="false" title="Szukaj" value aria-label="Szukaj"
                             @input="$emit('input', $event.target.value)"
-                            v-on:keyup.enter="selectCity(); value=filteredCities[current].name"
+                            v-on:keyup.enter="selectCity()"
                             v-on:keyup.down="down()"
                             v-on:keyup.up="up()"
                             v-on:keyup.delete="back()"                       
@@ -141,7 +141,8 @@ Vue.component('v-autocompleter', {
                 </div>
             </div>
             <ul :class="{nothing: value.length === 0, autocompleter: value.length > 0}">
-                <li class="element"  :class="{hovered: current === i}" v-for="(city, i) in filteredCities" v-on:click="value=city.name; clickSelect()">
+                <li class="element"  :class="{hovered: current === i}" v-for="(city, i) in filteredCities" v-on:click="clickSelect()">
+                    <img src="search.png">
                     <span class="highlighted" v-html="highlight(city.name, value)">{{ city.name }}</span>
                 </li>
             </ul>
@@ -285,6 +286,7 @@ Vue.component('v-autocompleter-results', {
                     </div>
                     <ul :class="{nothing: autocompleterResults == true || value.length == 0, autocompleter: autocompleterResults == false}">
                         <li class="element" :class="{hovered: currentResults == i}" v-for="(city, i) in filteredCities" v-on:click="value=city.name; selectCityResults2()">
+                            <img src="search.png">
                             <span class="highlighted" v-html="highlight(city.name, value)">{{ city.name }}</span>
                         </li>
                     </ul>
